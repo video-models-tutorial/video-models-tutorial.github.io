@@ -11,8 +11,9 @@
     --fg: #1c1a17;
     --muted: #6b6459;
     --rule: #d8d2c6;
-    --accent: #8a6d3b;
-    --link: #7a4f1e;
+    --link: #1c1a17;
+    --highlight: #42e3b4;
+    --highlight-ink: #0b1512;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -20,8 +21,7 @@
       --fg: #ece7dd;
       --muted: #a39a89;
       --rule: #3a362d;
-      --accent: #d3a25e;
-      --link: #e3b877;
+      --link: #ece7dd;
     }
   }
   :root[data-theme="dark"] {
@@ -29,16 +29,14 @@
     --fg: #ece7dd;
     --muted: #a39a89;
     --rule: #3a362d;
-    --accent: #d3a25e;
-    --link: #e3b877;
+    --link: #ece7dd;
   }
   :root[data-theme="light"] {
     --bg: #fbfaf8;
     --fg: #1c1a17;
     --muted: #6b6459;
     --rule: #d8d2c6;
-    --accent: #8a6d3b;
-    --link: #7a4f1e;
+    --link: #1c1a17;
   }
 
   * { box-sizing: border-box; }
@@ -50,6 +48,17 @@
     font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--highlight);
+    z-index: 10;
   }
 
   main {
@@ -66,14 +75,23 @@
     color: var(--muted);
   }
   .venue p { margin: 0.25em 0; }
-  .venue .name { color: var(--fg); font-weight: 600; }
+  .venue .name {
+    display: inline-block;
+    margin: 0 0 0.6em;
+    background: var(--highlight);
+    color: var(--highlight-ink);
+    font-weight: 700;
+    padding: 0.3em 0.85em;
+    border-radius: 2px;
+  }
 
   .rule {
-    width: 3rem;
-    height: 1px;
-    background: var(--rule);
+    width: 2.5rem;
+    height: 3px;
+    background: var(--highlight);
     margin: 2.25rem auto;
     border: none;
+    border-radius: 2px;
   }
 
   h1.title {
@@ -101,19 +119,30 @@
 
   a {
     color: var(--link);
-    text-decoration-color: var(--rule);
-    text-underline-offset: 0.15em;
+    text-decoration-color: var(--highlight);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
   }
-  a:hover { text-decoration-color: currentColor; }
+  a:hover { text-decoration-thickness: 2.5px; }
 
   h2.section {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     font-size: 0.8rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--muted);
     margin: 0 0 1.25rem;
+  }
+  h2.section::before,
+  h2.section::after {
+    content: "";
+    width: 1.5rem;
+    height: 2px;
+    background: var(--highlight);
   }
 
   section.abstract {
@@ -130,10 +159,13 @@
   section.update {
     text-align: center;
     margin-top: 3.5rem;
+    padding: 1.75rem 1.5rem;
+    border: 1px solid var(--highlight);
+    border-radius: 6px;
   }
 
   section.update h2.section {
-    color: var(--accent);
+    color: var(--fg);
     letter-spacing: 0.18em;
   }
 
@@ -153,21 +185,27 @@
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 1px solid var(--rule);
+    border: 1px solid var(--highlight);
     border-radius: 999px;
     color: var(--muted);
     cursor: pointer;
     font-size: 1rem;
     line-height: 1;
     padding: 0;
+    transition: background 0.15s ease, color 0.15s ease;
   }
   .theme-toggle:hover {
-    color: var(--fg);
-    border-color: var(--muted);
+    color: var(--highlight-ink);
+    background: var(--highlight);
+    border-color: var(--highlight);
   }
   .theme-toggle .icon-dark { display: none; }
   :root[data-theme="dark"] .theme-toggle .icon-light { display: none; }
   :root[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme-toggle .icon-light { display: none; }
+    :root:not([data-theme]) .theme-toggle .icon-dark { display: inline; }
+  }
 </style>
 </head>
 <body>

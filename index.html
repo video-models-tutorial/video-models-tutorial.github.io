@@ -1,12 +1,195 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Video Models Tutorial</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Large Video Generation Models — ECCV 2026 Tutorial</title>
+<meta name="description" content="ECCV 2026 Tutorial: Building Large Video Generation Models — Data Processing, Architectural Insights, Optimization Methods and Evaluation Strategies.">
+<style>
+  :root {
+    --bg: #fbfaf8;
+    --fg: #1c1a17;
+    --muted: #6b6459;
+    --rule: #d8d2c6;
+    --accent: #8a6d3b;
+    --link: #7a4f1e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15140f;
+      --fg: #ece7dd;
+      --muted: #a39a89;
+      --rule: #3a362d;
+      --accent: #d3a25e;
+      --link: #e3b877;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15140f;
+    --fg: #ece7dd;
+    --muted: #a39a89;
+    --rule: #3a362d;
+    --accent: #d3a25e;
+    --link: #e3b877;
+  }
+  :root[data-theme="light"] {
+    --bg: #fbfaf8;
+    --fg: #1c1a17;
+    --muted: #6b6459;
+    --rule: #d8d2c6;
+    --accent: #8a6d3b;
+    --link: #7a4f1e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem;
+  }
+
+  .venue {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .venue p { margin: 0.25em 0; }
+  .venue .name { color: var(--fg); font-weight: 600; }
+
+  .rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--rule);
+    margin: 2.25rem auto;
+    border: none;
+  }
+
+  h1.title {
+    text-align: center;
+    font-size: clamp(1.5rem, 1.05rem + 1.8vw, 2.15rem);
+    font-weight: 600;
+    line-height: 1.32;
+    margin: 0 0 1.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .authors {
+    text-align: center;
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .meta {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .meta p { margin: 0.35em 0; }
+  .meta a { color: var(--link); }
+
+  a {
+    color: var(--link);
+    text-decoration-color: var(--rule);
+    text-underline-offset: 0.15em;
+  }
+  a:hover { text-decoration-color: currentColor; }
+
+  h2.section {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 0 0 1.25rem;
+  }
+
+  section.abstract {
+    margin-top: 3.5rem;
+  }
+
+  .abstract p {
+    text-align: justify;
+    hyphens: auto;
+    font-size: 1rem;
+    color: var(--fg);
+  }
+
+  section.update {
+    text-align: center;
+    margin-top: 3.5rem;
+  }
+
+  section.update h2.section {
+    color: var(--accent);
+    letter-spacing: 0.18em;
+  }
+
+  section.update p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+</style>
 </head>
 <body>
-  <h1>Video Models Tutorial</h1>
-  <p>Coming soon.</p>
+<main>
+
+  <div class="venue">
+    <p class="name">ECCV Tutorial</p>
+    <p>September 9, 2026</p>
+    <p>Malmö, Sweden</p>
+  </div>
+
+  <hr class="rule">
+
+  <h1 class="title">Building Large Video Generation Models: Data Processing, Architectural Insights, Optimization Methods and Evaluation Strategies</h1>
+
+  <p class="authors">Viacheslav Vasilev, Maria Kovaleva, Vladimir Korviakov, and Denis Dimitrov</p>
+
+  <div class="meta">
+    <p><a href="https://kandinskylab.ai/index.html?lang=en">Kandinsky Lab</a></p>
+    <p>Contact: <a href="mailto:viacheslav.vasilev@kandinskylab.ai">viacheslav.vasilev@kandinskylab.ai</a></p>
+  </div>
+
+  <section class="abstract">
+    <h2 class="section">Abstract</h2>
+    <p>
+      This tutorial provides a comprehensive and systematic review of the development process for modern
+      large-scale video generation models. While visual generative AI research relies on pre-trained models,
+      many practical challenges &ndash; data scaling, model architecture, training and inference optimization,
+      and meaningful evaluation &ndash; remain uncovered in publications from the low-resource research groups
+      yet are critical for real-world deployment and research practice. At the same time, many aspects of the
+      development of modern large video models are shrouded in mystery, as this is often non-open-source
+      proprietary information. This tutorial describes the full development pipeline, from petabyte-scale data
+      curation and efficient Diffusion Transformer designs to multi-stage training and evaluation. Drawing on
+      recent advances from open-source projects like
+      <a href="https://kandinskylab.ai/index.html?lang=en">Kandinsky 5.0</a>,
+      <a href="https://wan.video/">Wan</a>, and
+      <a href="https://www.hunyuanvideo.org/">HunyuanVideo</a>,
+      we balance theoretical insight with practical strategies for improving model efficiency and enabling
+      low-resource usage. Attendees will gain actionable knowledge how to efficiently use the large-scale
+      modern video generation systems.
+    </p>
+  </section>
+
+  <section class="update">
+    <h2 class="section">To be updated</h2>
+    <p>Tutorial details and materials will be posted here.</p>
+  </section>
+
+</main>
 </body>
 </html>

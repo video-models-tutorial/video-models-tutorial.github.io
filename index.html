@@ -142,9 +142,56 @@
     font-size: 0.95rem;
     margin: 0;
   }
+
+  .theme-toggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+  }
+  .theme-toggle:hover {
+    color: var(--fg);
+    border-color: var(--muted);
+  }
+  .theme-toggle .icon-dark { display: none; }
+  :root[data-theme="dark"] .theme-toggle .icon-light { display: none; }
+  :root[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark and light theme">
+  <span class="icon-light">&#9728;</span>
+  <span class="icon-dark">&#9789;</span>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') {
+      root.setAttribute('data-theme', stored);
+    }
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = current ? current === 'dark' : prefersDark;
+      var next = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+</script>
 <main>
 
   <div class="venue">
@@ -160,7 +207,7 @@
   <p class="authors">Viacheslav Vasilev, Maria Kovaleva, Vladimir Korviakov, and Denis Dimitrov</p>
 
   <div class="meta">
-    <p><a href="https://kandinskylab.ai/index.html?lang=en">Kandinsky Lab</a></p>
+    <p><a href="https://kandinskylab.ai/index.html?lang=en" target="_blank" rel="noopener">Kandinsky Lab</a></p>
     <p>Contact: <a href="mailto:viacheslav.vasilev@kandinskylab.ai">viacheslav.vasilev@kandinskylab.ai</a></p>
   </div>
 
@@ -176,9 +223,9 @@
       proprietary information. This tutorial describes the full development pipeline, from petabyte-scale data
       curation and efficient Diffusion Transformer designs to multi-stage training and evaluation. Drawing on
       recent advances from open-source projects like
-      <a href="https://kandinskylab.ai/index.html?lang=en">Kandinsky 5.0</a>,
-      <a href="https://wan.video/">Wan</a>, and
-      <a href="https://www.hunyuanvideo.org/">HunyuanVideo</a>,
+      <a href="https://kandinskylab.ai/index.html?lang=en" target="_blank" rel="noopener">Kandinsky 5.0</a>,
+      <a href="https://wan.video/" target="_blank" rel="noopener">Wan</a>, and
+      <a href="https://www.hunyuanvideo.org/" target="_blank" rel="noopener">HunyuanVideo</a>,
       we balance theoretical insight with practical strategies for improving model efficiency and enabling
       low-resource usage. Attendees will gain actionable knowledge how to efficiently use the large-scale
       modern video generation systems.

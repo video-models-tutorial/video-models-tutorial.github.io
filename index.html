@@ -14,6 +14,8 @@
     --link: #1c1a17;
     --highlight: #42e3b4;
     --highlight-ink: #0b1512;
+    --card-bg: rgba(66, 227, 180, 0.06);
+    --card-border: rgba(66, 227, 180, 0.2);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -22,6 +24,8 @@
       --muted: #a39a89;
       --rule: #3a362d;
       --link: #ece7dd;
+      --card-bg: rgba(66, 227, 180, 0.08);
+      --card-border: rgba(66, 227, 180, 0.15);
     }
   }
   :root[data-theme="dark"] {
@@ -30,6 +34,8 @@
     --muted: #a39a89;
     --rule: #3a362d;
     --link: #ece7dd;
+    --card-bg: rgba(66, 227, 180, 0.08);
+    --card-border: rgba(66, 227, 180, 0.15);
   }
   :root[data-theme="light"] {
     --bg: #fbfaf8;
@@ -37,6 +43,8 @@
     --muted: #6b6459;
     --rule: #d8d2c6;
     --link: #1c1a17;
+    --card-bg: rgba(66, 227, 180, 0.06);
+    --card-border: rgba(66, 227, 180, 0.2);
   }
 
   * { box-sizing: border-box; }
@@ -117,6 +125,28 @@
   .meta p { margin: 0.35em 0; }
   .meta a { color: var(--link); }
 
+  /* Navigation */
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    margin: 2.5rem 0 1.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .nav a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.15em;
+  }
+  .nav a:hover {
+    border-bottom-color: var(--highlight);
+    color: var(--fg);
+  }
+
   a {
     color: var(--link);
     text-decoration-color: var(--highlight);
@@ -145,8 +175,9 @@
     background: var(--highlight);
   }
 
-  section.abstract {
-    margin-top: 3.5rem;
+  section {
+    margin-top: 4rem;
+    scroll-margin-top: 2rem;
   }
 
   .abstract p {
@@ -156,23 +187,218 @@
     color: var(--fg);
   }
 
-  section.update {
-    text-align: center;
-    margin-top: 3.5rem;
-    padding: 1.75rem 1.5rem;
-    border: 1px solid var(--highlight);
-    border-radius: 6px;
+  /* Motivation cards - stacked vertically */
+  .motivation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
   }
-
-  section.update h2.section {
-    color: var(--fg);
-    letter-spacing: 0.18em;
+  .motivation-card {
+    background: var(--card-bg);
+    border-left: 4px solid var(--highlight);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 4px 4px 0;
+    transition: background 0.2s;
+    width: 100%;
   }
-
-  section.update p {
-    color: var(--muted);
+  .motivation-card h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .motivation-card p, .motivation-card ul {
+    margin: 0.25rem 0;
     font-size: 0.95rem;
+    color: var(--fg);
+    opacity: 0.9;
+  }
+  .motivation-card ul {
+    padding-left: 1.2rem;
+  }
+  .motivation-card ul li {
+    margin-bottom: 0.1rem;
+  }
+
+  /* Highlighted Objectives block */
+  .objectives-highlight {
+    background: var(--card-bg);
+    border: 2px solid var(--highlight);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-top: 1.5rem;
+  }
+  .objectives-highlight h3 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 0.75rem;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .objectives-highlight ul {
     margin: 0;
+    padding-left: 1.5rem;
+  }
+  .objectives-highlight ul li {
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+
+  /* Program */
+  .schedule {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .schedule td, .schedule th {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .schedule .time {
+    white-space: nowrap;
+    color: var(--muted);
+    font-weight: 500;
+    width: 6rem;
+  }
+  .schedule .part {
+    font-weight: 600;
+  }
+  .schedule .speaker {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .topics-list {
+    margin: 1.5rem 0 0;
+    padding-left: 1.2rem;
+  }
+  .topics-list li {
+    margin-bottom: 0.25rem;
+  }
+
+  /* Speakers grid - 2 columns, first row: presenters, second row: organizers */
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 600px) {
+    .speakers-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .speaker-card {
+    text-align: center;
+  }
+  .speaker-card .avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--rule);
+    margin: 0 auto 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--muted);
+    overflow: hidden;
+  }
+  .speaker-card .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .speaker-card .name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 0.05rem;
+  }
+  .speaker-card .affiliation {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 0.2rem;
+  }
+  .speaker-card .role {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--highlight);
+    color: var(--highlight-ink);
+    padding: 0.1rem 0.7rem;
+    border-radius: 12px;
+    margin: 0.2rem 0 0.4rem;
+  }
+  .speaker-card .links {
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+  }
+  .speaker-card .links a {
+    margin: 0 0.2rem;
+  }
+
+  /* Materials */
+  .materials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    justify-content: center;
+    margin: 1.5rem 0 0;
+  }
+  .materials-list .item {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    min-width: 140px;
+    text-align: center;
+  }
+  .materials-list .item .label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .materials-list .item .status {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .materials-list .item a {
+    text-decoration: none;
+  }
+
+  /* References */
+  .ref-list {
+    font-size: 0.9rem;
+    padding-left: 1.2rem;
+  }
+  .ref-list li {
+    margin-bottom: 0.3rem;
+  }
+
+  /* Target Audience block */
+  .audience-block {
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .audience-block h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+  .audience-block p {
+    margin: 0.25rem 0;
   }
 
   .theme-toggle {
@@ -205,6 +431,18 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) .theme-toggle .icon-light { display: none; }
     :root:not([data-theme]) .theme-toggle .icon-dark { display: inline; }
+  }
+
+  footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  footer a {
+    color: var(--link);
   }
 </style>
 </head>
@@ -249,7 +487,18 @@
     <p>Contact: <a href="mailto:viacheslav.vasilev@kandinskylab.ai">viacheslav.vasilev@kandinskylab.ai</a></p>
   </div>
 
-  <section class="abstract">
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#abstract">Abstract</a>
+    <a href="#speakers">Speakers</a>
+    <a href="#motivation">Motivation</a>
+    <a href="#program">Program</a>
+    <a href="#materials">Materials</a>
+    <a href="#references">References</a>
+  </nav>
+
+  <!-- Abstract -->
+  <section id="abstract" class="abstract">
     <h2 class="section">Abstract</h2>
     <p>
       This tutorial provides a comprehensive and systematic review of the development process for modern
@@ -270,10 +519,175 @@
     </p>
   </section>
 
-  <section class="update">
-    <h2 class="section">To be updated</h2>
-    <p>Tutorial details and materials will be posted here</p>
+  <!-- Speakers (presenters first, then organizers) -->
+  <section id="speakers">
+    <h2 class="section">Presenters &amp; Organizers</h2>
+    <div class="speakers-grid">
+      <!-- Viacheslav Vasilev (Presenter) -->
+      <div class="speaker-card">
+        <div class="avatar"><img src="images/vasilev.png" alt="Viacheslav Vasilev"></div>
+        <div class="name">Viacheslav Vasilev</div>
+        <div class="affiliation">Kandinsky Lab</div>
+        <div class="role">Presenter</div>
+        <div class="links">
+          <a href="https://scholar.google.com/citations?user=redAz-kAAAAJ&hl=en" target="_blank">Scholar</a> &middot;
+          <a href="https://www.linkedin.com/in/viacheslav-vasilev-011828354" target="_blank">LinkedIn</a> &middot;
+          <a href="mailto:viacheslav.vasilev@kandinskylab.ai">Email</a>
+        </div>
+      </div>
+      <!-- Maria Kovaleva (Presenter) -->
+      <div class="speaker-card">
+        <div class="avatar"><img src="images/kovaleva.png" alt="Maria Kovaleva"></div>
+        <div class="name">Maria Kovaleva</div>
+        <div class="affiliation">Kandinsky Lab</div>
+        <div class="role">Presenter</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/maria-kovaleva-a977a52bb" target="_blank">LinkedIn</a> &middot;
+          <a href="mailto:maria.kovaleva@kandinskylab.ai">Email</a>
+        </div>
+      </div>
+      <!-- Vladimir Korviakov (Co-organizer) -->
+      <div class="speaker-card">
+        <div class="avatar"><img src="images/korviakov.jpeg" alt="Vladimir Korviakov"></div>
+        <div class="name">Vladimir Korviakov</div>
+        <div class="affiliation">Kandinsky Lab</div>
+        <div class="role">Co-organizer</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/vladimir-korviakov" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+      <!-- Denis Dimitrov (Co-organizer) -->
+      <div class="speaker-card">
+        <div class="avatar"><img src="images/dimitrov.jpeg" alt="Denis Dimitrov"></div>
+        <div class="name">Denis Dimitrov</div>
+        <div class="affiliation">Kandinsky Lab</div>
+        <div class="role">Co-organizer</div>
+        <div class="links">
+          <a href="https://scholar.google.com/citations?user=3JSIJpYAAAAJ&hl=en" target="_blank">Scholar</a> &middot;
+          <a href="https://www.linkedin.com/in/denis-dimitrov-66bbb3116" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- Motivation & Objectives -->
+  <section id="motivation">
+    <h2 class="section">Motivation &amp; Objectives</h2>
+    <div class="motivation-grid">
+      <div class="motivation-card">
+        <h3>&#9889; Relevance</h3>
+        <p>Video generation is one of the fastest-moving areas in AI, with immense research interest.</p>
+      </div>
+      <div class="motivation-card">
+        <h3>&#8594; Bridging Theory &amp; Practice</h3>
+        <p>Many researchers understand diffusion models but lack practical knowledge of data pipelines, training and inference optimizations. Attendees will take concrete strategies they can apply in their own work.</p>
+      </div>
+      <div class="motivation-card">
+        <h3>&#128736; Open-Source &amp; Expertise</h3>
+        <p>The open-source community drives innovation in generative AI. This tutorial draws directly from our recent advances, democratizing knowledge and encouraging open-source research.</p>
+      </div>
+    </div>
+
+    <!-- Key Objectives - отдельный заметный блок -->
+    <div class="objectives-highlight">
+      <h3>&#127919; Key Objectives of this Tutorial</h3>
+      <ul>
+        <li>Overview of general approaches and the current state of the art in video generation using diffusion models.</li>
+        <li>Data Engineering at Scale: curating, processing, and managing petabytes of video data with quality control.</li>
+        <li>Modern Architectures: from U-Nets to Diffusion Transformers and specialized attention mechanisms.</li>
+        <li>Training Pipeline Design: multi-stage strategies from pre-training to RL-based fine-tuning.</li>
+        <li>Optimization Techniques: reducing training/inference costs while maintaining quality.</li>
+        <li>Evaluation and Deployment: benchmarking, real-world considerations, and ethical use.</li>
+        <li>Practical Insights: equipping attendees to use pre-trained generative systems efficiently.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Program -->
+  <section id="program">
+    <h2 class="section">Program</h2>
+
+    <h3 style="text-align:center; margin: 0 0 0.5rem; font-weight:400; color:var(--muted);">Schedule (Half-day, ~3.5 hours)</h3>
+
+    <table class="schedule">
+      <tr><td class="time">09:00 – 09:15</td><td><span class="part">Part 1: Introduction</span><br><span class="speaker">Viacheslav Vasilev</span></td></tr>
+      <tr><td class="time">09:15 – 09:30</td><td><span class="part">Part 2: Data Engineering for Video Models</span><br><span class="speaker">Viacheslav Vasilev</span></td></tr>
+      <tr><td class="time">09:30 – 10:00</td><td><span class="part">Part 3: Architecture &amp; Design Choices</span><br><span class="speaker">Viacheslav Vasilev</span></td></tr>
+      <tr><td class="time">10:00 – 10:25</td><td><span class="part">Part 4: Training Strategies</span><br><span class="speaker">Viacheslav Vasilev</span></td></tr>
+      <tr><td class="time">10:25 – 10:55</td><td><span class="part">Coffee Break / Q&amp;A</span><br><span class="speaker" style="color:var(--muted);">—</span></td></tr>
+      <tr><td class="time">10:55 – 11:15</td><td><span class="part">Part 5: Optimizations</span><br><span class="speaker">Maria Kovaleva</span></td></tr>
+      <tr><td class="time">11:15 – 11:45</td><td><span class="part">Part 5.1: Inference Optimization Demo</span><br><span class="speaker">Maria Kovaleva</span></td></tr>
+      <tr><td class="time">11:45 – 12:00</td><td><span class="part">Part 6: Evaluation &amp; Benchmarking</span><br><span class="speaker">Maria Kovaleva</span></td></tr>
+      <tr><td class="time">12:00 – 12:15</td><td><span class="part">Part 7: Licensing, Ethics &amp; Future Directions</span><br><span class="speaker">Maria Kovaleva</span></td></tr>
+      <tr><td class="time">12:15 – 12:30</td><td><span class="part">Part 8: Final Q&amp;A</span><br><span class="speaker" style="color:var(--muted);">—</span></td></tr>
+    </table>
+
+    <h3 style="margin: 2rem 0 0.5rem; font-weight:400; color:var(--muted);">Detailed Topics <span style="font-weight:300;">(including, but not limited to)</span></h3>
+    <ul class="topics-list">
+      <li><strong>Part 1 (15′):</strong> From GANs to diffusion image models; video generation history; key challenges (data, temporal consistency, computational cost, evaluation).</li>
+      <li><strong>Part 2 (15′):</strong> Data engineering – open/proprietary datasets, pipeline design (scene segmentation, deduplication, quality filtering, captioning, infrastructure).</li>
+      <li><strong>Part 3 (30′):</strong> Core algorithms (diffusion &amp; flow matching); from images to video; LDMs, DiT/MMDiT, cross-attention; attention optimization (STA, NABLA); VAE and temporal consistency.</li>
+      <li><strong>Part 4 (25′):</strong> Multi-stage pre-training; stabilization (EMA, gradient clipping); SFT, SFT soup, distillation, RL-based post-training.</li>
+      <li><strong>Part 5 (20′):</strong> Memory-efficient distributed training (FSDP, sequence parallel); activation checkpointing; mixed-precision; quantization; kernel optimizations; deployment.</li>
+      <li><strong>Part 5.1 (30′):</strong> Live coding demo: inference acceleration (attention engine, MagCache, torch.compile) and memory optimization (offloading, quantization, block swap).</li>
+      <li><strong>Part 6 (15′):</strong> Beyond automated metrics; compositional benchmarks (T2V-CompBench, VBench, MovieGen); human SBS evaluation; domain-specific evaluation.</li>
+      <li><strong>Part 7 (15′):</strong> Licensing, bias mitigation, open challenges (long video, world models).</li>
+    </ul>
+  </section>
+
+  <!-- Materials -->
+  <section id="materials">
+    <h2 class="section">Materials</h2>
+    <p style="text-align:center; color:var(--muted);">Slides, code, and supplementary materials will be made available after the tutorial.</p>
+    <div class="materials-list">
+      <div class="item">
+        <span class="label">&#128196; Slides</span>
+        <span class="status">Coming soon</span>
+      </div>
+      <div class="item">
+        <span class="label">&#128187; Jupyter Notebook</span>
+        <span class="status">Coming soon</span>
+      </div>
+      <div class="item">
+        <span class="label">&#128214; Textbook</span>
+        <span class="status">Coming soon</span>
+      </div>
+      <div class="item">
+        <span class="label"><a href="https://github.com/kandinskylab" target="_blank">Kandinsky Lab</a></span>
+        <span class="status">GitHub</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Audience & Prerequisites -->
+  <section id="audience" class="audience-block">
+    <h2>Target Audience &amp; Prerequisites</h2>
+    <p><strong>Target audience:</strong> Researchers working on generative models, computer vision, and multimodal AI, as well as practitioners using pre-trained models in their applications. Estimated attendance: 200–400.</p>
+    <p><strong>Prerequisites:</strong> Basic understanding of deep learning, diffusion models, transformers, and Python. No prior expertise in video generation is required.</p>
+  </section>
+
+  <!-- References -->
+  <section id="references">
+    <h2 class="section">References</h2>
+    <ol class="ref-list">
+      <li>Arkhipkin, V., Korviakov, V., et al.: Kandinsky 5.0: A family of foundation models for image and video generation (2025). <a href="https://arxiv.org/abs/2511.14993" target="_blank">arXiv:2511.14993</a></li>
+      <li>Kong, W., Tian, Q., et al.: HunyuanVideo: A systematic framework for large video generative models (2025). <a href="https://arxiv.org/abs/2412.03603" target="_blank">arXiv:2412.03603</a></li>
+      <li>Wan, T., Wang, A., et al.: Wan: Open and advanced large-scale video generative models (2025). <a href="https://arxiv.org/abs/2503.20314" target="_blank">arXiv:2503.20314</a></li>
+      <li>Peebles, W., Xie, S.: Scalable diffusion models with transformers (2023). <a href="https://arxiv.org/abs/2212.09748" target="_blank">arXiv:2212.09748</a></li>
+      <li>Mikhailov, D., Letunovskiy, A., Kovaleva, M., et al.: VNBLA: Neighborhood Adaptive Block-Level Attention (2025). <a href="https://arxiv.org/abs/2507.13546" target="_blank">arXiv:2507.13546</a></li>
+      <li>Vasilev, V., Agafonova, J., et al.: RusCode: Russian cultural code benchmark for text-to-image generation. NAACL 2025 Findings.</li>
+      <li>Arkhipkin, V., Vasilev, V., et al.: Kandinsky 3: Text-to-image synthesis for multifunctional generation framework. EMNLP 2024 System Demonstrations.</li>
+    </ol>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="https://eccv.ecva.net/" target="_blank">ECCV 2026</a> &middot; Malmö, Sweden &middot;
+      <a href="mailto:viacheslav.vasilev@kandinskylab.ai">Contact</a>
+    </p>
+    <p style="font-size:0.75rem; margin-top:0.5rem;">&copy; 2026 Kandinsky Lab &mdash; Tutorial website</p>
+  </footer>
 
 </main>
 </body>

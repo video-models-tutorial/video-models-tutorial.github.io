@@ -278,7 +278,7 @@
     margin-bottom: 0.25rem;
   }
 
-  /* Speakers grid - 2 columns, first row: presenters, second row: organizers */
+  /* Speakers grid - 2 columns for two presenters */
   .speakers-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -323,17 +323,6 @@
     font-size: 0.85rem;
     color: var(--muted);
     margin: 0 0 0.2rem;
-  }
-  .speaker-card .role {
-    display: inline-block;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    background: var(--highlight);
-    color: var(--highlight-ink);
-    padding: 0.1rem 0.7rem;
-    border-radius: 12px;
-    margin: 0.2rem 0 0.4rem;
   }
   .speaker-card .links {
     margin-top: 0.4rem;
@@ -480,7 +469,7 @@
 
   <h1 class="title">Building Large Video Generation Models: Data Processing, Architectural Insights, Optimization Methods and Evaluation Strategies</h1>
 
-  <p class="authors">Viacheslav Vasilev, Maria Kovaleva, Vladimir Korviakov, Denis Dimitrov</p>
+  <p class="authors">Viacheslav Vasilev, Maria Kovaleva</p>
 
   <div class="meta">
     <p><a href="https://kandinskylab.ai/index.html?lang=en" target="_blank" rel="noopener">Kandinsky Lab</a></p>
@@ -519,52 +508,30 @@
     </p>
   </section>
 
-  <!-- Speakers (presenters first, then organizers) -->
+  <!-- Speakers (only two presenters) -->
   <section id="speakers">
-    <h2 class="section">Presenters &amp; Organizers</h2>
+    <h2 class="section">Presenters and Organizers</h2>
     <div class="speakers-grid">
-      <!-- Viacheslav Vasilev (Presenter) -->
+      <!-- Viacheslav Vasilev -->
       <div class="speaker-card">
         <div class="avatar"><img src="images/vasilev.png" alt="Viacheslav Vasilev"></div>
         <div class="name">Viacheslav Vasilev</div>
         <div class="affiliation">Kandinsky Lab</div>
-        <div class="role">Presenter</div>
         <div class="links">
           <a href="https://scholar.google.com/citations?user=redAz-kAAAAJ&hl=en" target="_blank">Scholar</a> &middot;
           <a href="https://www.linkedin.com/in/viacheslav-vasilev-011828354" target="_blank">LinkedIn</a> &middot;
           <a href="mailto:viacheslav.vasilev@kandinskylab.ai">Email</a>
         </div>
       </div>
-      <!-- Maria Kovaleva (Presenter) -->
+      <!-- Maria Kovaleva -->
       <div class="speaker-card">
         <div class="avatar"><img src="images/kovaleva.png" alt="Maria Kovaleva"></div>
         <div class="name">Maria Kovaleva</div>
         <div class="affiliation">Kandinsky Lab</div>
-        <div class="role">Presenter</div>
         <div class="links">
+          <a href="https://scholar.google.com/citations?user=1Ga0cEEAAAAJ&hl=en" target="_blank">Scholar</a> &middot;
           <a href="https://www.linkedin.com/in/maria-kovaleva-a977a52bb" target="_blank">LinkedIn</a> &middot;
           <a href="mailto:maria.kovaleva@kandinskylab.ai">Email</a>
-        </div>
-      </div>
-      <!-- Vladimir Korviakov (Co-organizer) -->
-      <div class="speaker-card">
-        <div class="avatar"><img src="images/korviakov.jpeg" alt="Vladimir Korviakov"></div>
-        <div class="name">Vladimir Korviakov</div>
-        <div class="affiliation">Kandinsky Lab</div>
-        <div class="role">Co-organizer</div>
-        <div class="links">
-          <a href="https://www.linkedin.com/in/vladimir-korviakov" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-      <!-- Denis Dimitrov (Co-organizer) -->
-      <div class="speaker-card">
-        <div class="avatar"><img src="images/dimitrov.jpeg" alt="Denis Dimitrov"></div>
-        <div class="name">Denis Dimitrov</div>
-        <div class="affiliation">Kandinsky Lab</div>
-        <div class="role">Co-organizer</div>
-        <div class="links">
-          <a href="https://scholar.google.com/citations?user=3JSIJpYAAAAJ&hl=en" target="_blank">Scholar</a> &middot;
-          <a href="https://www.linkedin.com/in/denis-dimitrov-66bbb3116" target="_blank">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -646,10 +613,6 @@
       </div>
       <div class="item">
         <span class="label">&#128187; Jupyter Notebook</span>
-        <span class="status">Coming soon</span>
-      </div>
-      <div class="item">
-        <span class="label">&#128214; Textbook</span>
         <span class="status">Coming soon</span>
       </div>
       <div class="item">

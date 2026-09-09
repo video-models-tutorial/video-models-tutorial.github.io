@@ -49,6 +49,10 @@
 
   * { box-sizing: border-box; }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     background: var(--bg);
@@ -187,7 +191,40 @@
     color: var(--fg);
   }
 
-  /* Motivation cards - stacked vertically */
+  /* Zoom button */
+  .zoom-wrapper {
+    text-align: center;
+    margin: 0 0 1.8rem;
+  }
+  .zoom-button {
+    display: inline-block;
+    background: var(--highlight);
+    color: var(--highlight-ink);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.7rem 2.2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    border: 2px solid var(--highlight);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 10px rgba(66, 227, 180, 0.3);
+    letter-spacing: 0.02em;
+  }
+  .zoom-button:hover {
+    background: var(--bg);
+    color: var(--fg);
+    border-color: var(--highlight);
+    box-shadow: 0 4px 18px rgba(66, 227, 180, 0.5);
+    transform: scale(1.02);
+  }
+  @media (max-width: 480px) {
+    .zoom-button {
+      font-size: 0.95rem;
+      padding: 0.55rem 1.4rem;
+    }
+  }
+
+  /* Motivation cards */
   .motivation-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -201,6 +238,9 @@
     border-radius: 0 4px 4px 0;
     transition: background 0.2s;
     width: 100%;
+  }
+  .motivation-card:hover {
+    background: rgba(66, 227, 180, 0.12);
   }
   .motivation-card h3 {
     font-weight: 600;
@@ -221,7 +261,6 @@
     margin-bottom: 0.1rem;
   }
 
-  /* Highlighted Objectives block */
   .objectives-highlight {
     background: var(--card-bg);
     border: 2px solid var(--highlight);
@@ -245,7 +284,6 @@
     font-size: 0.95rem;
   }
 
-  /* Program */
   .schedule {
     width: 100%;
     border-collapse: collapse;
@@ -278,7 +316,6 @@
     margin-bottom: 0.25rem;
   }
 
-  /* Speakers grid - 2 columns for two presenters */
   .speakers-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -332,7 +369,6 @@
     margin: 0 0.2rem;
   }
 
-  /* Materials */
   .materials-list {
     display: flex;
     flex-wrap: wrap;
@@ -362,7 +398,6 @@
     text-decoration: none;
   }
 
-  /* References */
   .ref-list {
     font-size: 0.9rem;
     padding-left: 1.2rem;
@@ -371,7 +406,6 @@
     margin-bottom: 0.3rem;
   }
 
-  /* Target Audience block */
   .audience-block {
     margin-top: 3rem;
     padding: 1.5rem 2rem;
@@ -486,6 +520,16 @@
     <a href="#references">References</a>
   </nav>
 
+  <!-- ZOOM BUTTON – placed right above the Abstract section -->
+  <div class="zoom-wrapper">
+    <a href="https://us04web.zoom.us/j/75407536852?pwd=D5HItRWjXQ30Hj63Q53N4qGrZaTgnU.1"
+       target="_blank"
+       rel="noopener"
+       class="zoom-button">
+       🎥 Join Zoom Live
+    </a>
+  </div>
+
   <!-- Abstract -->
   <section id="abstract" class="abstract">
     <h2 class="section">Abstract</h2>
@@ -555,7 +599,7 @@
       </div>
     </div>
 
-    <!-- Key Objectives - отдельный заметный блок -->
+    <!-- Key Objectives -->
     <div class="objectives-highlight">
       <h3>&#127919; Key Objectives of this Tutorial</h3>
       <ul>

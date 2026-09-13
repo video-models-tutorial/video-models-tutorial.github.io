@@ -191,12 +191,12 @@
     color: var(--fg);
   }
 
-  /* Zoom button */
-  .zoom-wrapper {
+  /* Slides CTA (top button) */
+  .slides-cta-wrapper {
     text-align: center;
     margin: 0 0 1.8rem;
   }
-  .zoom-button {
+  .slides-cta {
     display: inline-block;
     background: var(--highlight);
     color: var(--highlight-ink);
@@ -210,15 +210,16 @@
     box-shadow: 0 2px 10px rgba(66, 227, 180, 0.3);
     letter-spacing: 0.02em;
   }
-  .zoom-button:hover {
+  .slides-cta:hover {
     background: var(--bg);
     color: var(--fg);
     border-color: var(--highlight);
     box-shadow: 0 4px 18px rgba(66, 227, 180, 0.5);
     transform: scale(1.02);
+    text-decoration: none;
   }
   @media (max-width: 480px) {
-    .zoom-button {
+    .slides-cta {
       font-size: 0.95rem;
       padding: 0.55rem 1.4rem;
     }
@@ -520,13 +521,13 @@
     <a href="#references">References</a>
   </nav>
 
-  <!-- ZOOM BUTTON – placed right above the Abstract section -->
-  <div class="zoom-wrapper">
-    <a href="https://us04web.zoom.us/j/75407536852?pwd=D5HItRWjXQ30Hj63Q53N4qGrZaTgnU.1"
+  <!-- Slides link (duplicated, right above the Abstract section) -->
+  <div class="slides-cta-wrapper">
+    <a href="https://github.com/video-models-tutorial/video-models-tutorial.github.io/tree/main/files/slides.pdf"
        target="_blank"
        rel="noopener"
-       class="zoom-button">
-       🎥 Join Zoom Live
+       class="slides-cta">
+       &#128196; View Slides
     </a>
   </div>
 
@@ -653,14 +654,14 @@
     <div class="materials-list">
       <div class="item">
         <span class="label">&#128196; Slides</span>
-        <span class="status">Coming soon</span>
+        <a href="https://github.com/video-models-tutorial/video-models-tutorial.github.io/tree/main/files/slides.pdf" class="status" target="_blank" rel="noopener">View on GitHub</a>
       </div>
       <div class="item">
         <span class="label">&#128187; Jupyter Notebook</span>
-        <a href="https://github.com/video-models-tutorial/video-models-tutorial.github.io/tree/main/files/eccv_tutorial.ipynb" class="status" target="_blank">Download Notebook</a>
+        <a href="https://github.com/video-models-tutorial/video-models-tutorial.github.io/tree/main/files/eccv_tutorial.ipynb" class="status" target="_blank" rel="noopener">Download Notebook</a>
       </div>
       <div class="item">
-        <span class="label"><a href="https://github.com/kandinskylab" target="_blank">Kandinsky Lab</a></span>
+        <span class="label"><a href="https://github.com/kandinskylab" target="_blank" rel="noopener">Kandinsky Lab</a></span>
         <span class="status">GitHub</span>
       </div>
     </div>
@@ -690,7 +691,7 @@
   <!-- Footer -->
   <footer>
     <p>
-      <a href="https://eccv.ecva.net/" target="_blank">ECCV 2026</a> &middot; Malmö, Sweden &middot;
+      <a href="https://eccv.ecva.net/" target="_blank" rel="noopener">ECCV 2026</a> &middot; Malmö, Sweden &middot;
       <a href="mailto:viacheslav.vasilev@kandinskylab.ai">Contact</a>
     </p>
     <p style="font-size:0.75rem; margin-top:0.5rem;">&copy; 2026 Kandinsky Lab &mdash; Tutorial website</p>
